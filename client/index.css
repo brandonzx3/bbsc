@@ -13,6 +13,11 @@ body{
     font-size: 45px;
 }
 
+#links {
+    height: 4%;
+    background-color: red;
+}
+
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
