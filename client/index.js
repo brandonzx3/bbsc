@@ -15,7 +15,7 @@ window.onload = function() {
         const date = new Date();
         let ssm = (date.getHours() * 3600) + (date.getMinutes() * 60) + date.getSeconds();
 
-        var scedule_time = [
+        var schedule_times = [
             [24600, 28200], //6:50 7:50
             [28800, 31800], //8:00 8:50
             [32100, 35100], //8:55 9:45
@@ -29,17 +29,17 @@ window.onload = function() {
         let time_offset = -4;
 
         ssm += time_offset;
-        if(ssm < scedule_times[0]) status.innerHTML = `school starts <awoga how get cool looking time>`;
+        if(ssm < schedule_times[0]) status.innerHTML = `School starts in ${elapsed_from_seconds(schedule_times[0][0] - ssm)}`;
         
         for (let i = 0; i < schedule_times.length; i++) {
             //In class
             if (schedule_times[i][0] <= ssm && ssm < schedule_times[i][1])
-            status.innerHTML = `In class`;
+            status.innerHTML = `In class. Class ends in ${elapsed_from_seconds(schedule_times[i][1] - ssm)}`;
             //Passing period
             const ip = i + 1;
-            if (ip < this.app.schedule_times.length) {
+            if (ip < schedule_times.length) {
                 if (schedule_times[i][1] <= ssm && ssm < schedule_times[ip][0])
-                status.innerHTML = `Heading to Class`;
+                status.innerHTML = `Heading to Class. Class starts in ${elapsed_from_seconds(schedule_times[ip][0] - ssm)}`;
             } 
         }
         status.innerHTML = "after school";

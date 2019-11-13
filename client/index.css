@@ -18,7 +18,7 @@ body{
     background-color: red;
 }
 
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
+#status {
+    font-size: 30px;
+    text-align: center;
+}
