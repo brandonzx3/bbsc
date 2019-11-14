@@ -31,6 +31,7 @@ window.onload = function() {
         let time_offset = -4;
 
         ssm += time_offset;
+        //alert(ssm);
         if(ssm < schedule_times[0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[0][0] - ssm)}`;
         
         for (let i = 0; i < schedule_times.length; i++) {
@@ -44,7 +45,7 @@ window.onload = function() {
                 status.innerHTML = `Status: Heading to Class. Class starts in ${elapsed_from_seconds(schedule_times[ip][0] - ssm)}`;
             } 
         }
-        status.innerHTML = "after school";
+        if(ssm > schedule_times[8]) status.innerHTML = "after school";
     }
     setInterval(function(){ update_status(); }, 500);
 };
