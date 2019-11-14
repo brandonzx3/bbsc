@@ -1,0 +1,33 @@
+html{ width: 100%; height: 100%; overflow: hidden; margin: 0; padding: 0; }
+
+body{
+    padding: 0%;
+    margin: 0%;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+}
+
+#topbar {
+    grid-column: 2/9;
+    text-align: center;
+    background-color: red;
+}
+
+#sidebar {
+    grid-column: 1/2;
+    grid-row: 1/6;
+    background-color: red;
+}
+
+#content {
+    grid-column: 2/9;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: white;
+}

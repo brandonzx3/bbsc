@@ -1,17 +1,17 @@
 window.onload = function() {
     var status = document.querySelector("#status");
 
-    function elapsed_from_seconds(seconds) {
-    const hours = Math.floor(seconds / (60 * 60));
-    seconds -= hours * (60 * 60);
-    const minutes = Math.floor(seconds / 60);
-    seconds -= minutes * 60;
-    if (hours > 0) return `${hours} hours, ${minutes} minutes, and ${seconds} seconds`;
-    if (minutes > 0) return `${minutes} minutes and ${seconds} seconds`;
-    return seconds + " seconds";
-}
-
     status.innerHTML = "Fetching status...";
+
+    function elapsed_from_seconds(seconds) {
+        const hours = Math.floor(seconds / (60 * 60));
+        seconds -= hours * (60 * 60);
+        const minutes = Math.floor(seconds / 60);
+        seconds -= minutes * 60;
+        if (hours > 0) return `${hours} hours, ${minutes} minutes, and ${seconds} seconds`;
+        if (minutes > 0) return `${minutes} minutes and ${seconds} seconds`;
+        return seconds + " seconds";
+    }
 
     function update_status() {
         const date = new Date();
