@@ -45,7 +45,7 @@ window.onload = function() {
                 status.innerHTML = `Status: Heading to Class. Class starts in ${elapsed_from_seconds(schedule_times[ip][0] - ssm)}`;
             } 
         }
-        if(ssm > schedule_times[8]) status.innerHTML = "after school";
+        if(ssm > schedule_times[8][1]) status.innerHTML = "after school";
     }
     setInterval(function(){ update_status(); }, 500);
 };
