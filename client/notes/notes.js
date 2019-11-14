@@ -10,6 +10,6 @@ window.onload = function() {
             localStorage.setItem("content", content.innerHTML);
         }, 100);
     } else {
-        alert("your browser does not support web storage");
+        alert("Your browser does not support web storage, your notes will not be saved.");
     }
 }

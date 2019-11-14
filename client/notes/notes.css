@@ -29,5 +29,5 @@ body{
     grid-column: 2/9;
     padding: 10px;
     overflow-y: auto;
-    background-color: white;
+    background-color: lightgray;
 }
