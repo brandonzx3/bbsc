@@ -11,6 +11,8 @@ window.onload = function() {
     return seconds + " seconds";
 }
 
+    status.innerHTML = "Fetching status...";
+
     function update_status() {
         const date = new Date();
         let ssm = (date.getHours() * 3600) + (date.getMinutes() * 60) + date.getSeconds();
@@ -29,17 +31,17 @@ window.onload = function() {
         let time_offset = -4;
 
         ssm += time_offset;
-        if(ssm < schedule_times[0]) status.innerHTML = `School starts in ${elapsed_from_seconds(schedule_times[0][0] - ssm)}`;
+        if(ssm < schedule_times[0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[0][0] - ssm)}`;
         
         for (let i = 0; i < schedule_times.length; i++) {
             //In class
             if (schedule_times[i][0] <= ssm && ssm < schedule_times[i][1])
-            status.innerHTML = `In class. Class ends in ${elapsed_from_seconds(schedule_times[i][1] - ssm)}`;
+            status.innerHTML = `Status: In class. Class ends in ${elapsed_from_seconds(schedule_times[i][1] - ssm)}`;
             //Passing period
             const ip = i + 1;
             if (ip < schedule_times.length) {
                 if (schedule_times[i][1] <= ssm && ssm < schedule_times[ip][0])
-                status.innerHTML = `Heading to Class. Class starts in ${elapsed_from_seconds(schedule_times[ip][0] - ssm)}`;
+                status.innerHTML = `Status: Heading to Class. Class starts in ${elapsed_from_seconds(schedule_times[ip][0] - ssm)}`;
             } 
         }
         status.innerHTML = "after school";
