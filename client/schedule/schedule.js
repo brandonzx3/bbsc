@@ -34,7 +34,11 @@ window.onload = function() {
         let ssm = (date.getHours() * 3600) + (date.getMinutes() * 60) + date.getSeconds();
         
         ssm += time_offset;
-        //alert(ssm);
+        
+        //idiot check
+        if(scheudle_start_time >= schedule_times.length) status.innerHTML = "Issue with schedule";
+
+        //before school
         if(ssm < schedule_times[schedule_start_time][0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[schedule_start_time][0] - ssm)}`;
         
         for (let i = schedule_start_time; i < schedule_times.length; i++) {
