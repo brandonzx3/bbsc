@@ -14,7 +14,7 @@ window.onload = function() {
     }
 
 
-    var schedule_times = [
+    const schedule_times = [
         [24600, 28200], //6:50 7:50
         [28800, 31800], //8:00 8:50
         [32100, 35100], //8:55 9:45
