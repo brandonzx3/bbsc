@@ -1,5 +1,6 @@
 window.onload = function() {
-    var status = document.querySelector("#status");
+    const status = document.querySelector("#status");
+    const edit_schedule = document.querySelector("#edit_button");
 
     status.innerHTML = "Fetching status...";
 
@@ -37,7 +38,8 @@ window.onload = function() {
         
         let day = date.getDay();
         
-        if(day === 7 || day === 0) {
+        //weekend
+        if(day === 6 || day === 0) {
             status.innerHTML = "Status: Weekend";
         }
 
@@ -58,4 +60,8 @@ window.onload = function() {
         if(ssm > schedule_times[8][1]) status.innerHTML = "Status: after school";
     }
     setInterval(function(){ update_status(); }, 500);
+    
+    edit_schedule.onclick = function() {
+        alert('test');
+    }
 };
