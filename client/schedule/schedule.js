@@ -35,8 +35,11 @@ window.onload = function() {
         
         ssm += time_offset;
         
-        //idiot check
-        //if(scheudle_start_time >= schedule_times.length) status.innerHTML = "Issue with schedule";
+        let day = date.getDay();
+        
+        if(day === 7 || day === 0) {
+            status.innerHTML = "Status: Weekend";
+        }
 
         //before school
         if(ssm < schedule_times[schedule_start_time][0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[schedule_start_time][0] - ssm)}`;
