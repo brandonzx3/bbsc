@@ -11,6 +11,7 @@ body{
     text-align: center;
     font-weight: bolder;
     font-size: 45px;
+    color: white;
 }
 
 #links {
@@ -33,9 +34,12 @@ button {
     background-color: red;
     border: none;
     font-size: 20px;
-    transition-duration: 0.4s;
+    color: white;
 }
 
 button:hover {
     background-color: rgb(200, 0, 0);
+    cursor: pointer;
 }
+
+button:focus {outline:0;}

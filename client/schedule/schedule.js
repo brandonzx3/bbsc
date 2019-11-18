@@ -63,5 +63,5 @@ window.onload = function() {
     
     edit_schedule.onclick = function() {
         alert('test');
-    }
+    };
 };
