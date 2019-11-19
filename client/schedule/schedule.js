@@ -25,7 +25,7 @@ window.onload = function() {
         [44400, 47400], //12:20 1:10
         [47700, 50700], //1:15 2:05
         [51000, 54000] //2:10 3:00
-    ]
+    ];
 
     let time_offset = -4;
     let schedule_start_time = 1;

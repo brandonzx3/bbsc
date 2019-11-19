@@ -16,13 +16,13 @@ body{
 #topbar {
     grid-column: 2/9;
     text-align: center;
-    background-color: red;
+    background-color: rgb(150, 0, 0);
 }
 
 #sidebar {
     grid-column: 1/2;
     grid-row: 1/6;
-    background-color: red;
+    background-color: rgb(150, 0, 0);
 }
 
 #content {
@@ -31,3 +31,18 @@ body{
     overflow-y: auto;
     background-color: lightgray;
 }
+
+button {
+    border-radius: 10px;
+    background-color: red;
+    border: none;
+    font-size: 20px;
+    color: white;
+}
+
+button:hover {
+    background-color: rgb(200, 0, 0);
+    cursor: pointer;
+}
+
+button:focus {outline:0;}
