@@ -1,6 +1,7 @@
 window.onload = function() {
   let saveNote = document.querySelector("#saveNote");
   let loadNote = document.querySelector("#loadNote");
+  let notwName = document.querySelector("#noteName");
   let clear = document.querySelector("#clear");
   let storageCapability;
   let noteName;
@@ -20,7 +21,7 @@ saveNote.onclick = function () {
 
 loadNote.onclick = function () {
   noteName = document.getElementById("noteName").value;
-  if (storageCapability == true) {
+  if (storageCapability === true) {
     content.innerHTML = localStorage.getItem(noteName);
   } else {
     alert("Error: Unable to access note");
@@ -31,6 +32,12 @@ clear.onclick = function() {
     if(confirm("are you shure you want to do this")) {
         localStorage.clear();
     }
+}
+
+newNote.onclick = function() {
+    content.innerHTML = "";
+    document.getElementById("noteName").value = "";
+    
 }
 
     //save
