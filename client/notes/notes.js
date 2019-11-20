@@ -1,6 +1,7 @@
 window.onload = function() {
   let saveNote = document.querySelector("#saveNote");
   let loadNote = document.querySelector("#loadNote");
+  let clear = document.querySelector("#clear");
   let storageCapability;
   let noteName;
   const content = document.querySelector("#content");
@@ -25,6 +26,12 @@ loadNote.onclick = function () {
     alert("Error: Unable to access note");
   }
 };
+
+clear.onclick = function() {
+    if(confirm("are you shure you want to do this")) {
+        localStorage.clear();
+    }
+}
 
     //save
 /*    setInterval(function() {
