@@ -36,13 +36,6 @@ window.onload = function() {
         
         ssm += time_offset;
         
-        let day = date.getDay();
-        
-        //weekend
-        if(day === 6 || day === 0) {
-            status.innerHTML = "Status: Weekend";
-        }
-
         //before school
         if(ssm < schedule_times[schedule_start_time][0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[schedule_start_time][0] - ssm)}`;
         
