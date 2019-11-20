@@ -1,5 +1,6 @@
 window.onload = function() {
-    var status = document.querySelector("#status");
+    const status = document.querySelector("#status");
+    const edit_schedule = document.querySelector("#edit_button");
 
     status.innerHTML = "Fetching status...";
 
@@ -24,7 +25,7 @@ window.onload = function() {
         [44400, 47400], //12:20 1:10
         [47700, 50700], //1:15 2:05
         [51000, 54000] //2:10 3:00
-    ]
+    ];
 
     let time_offset = -4;
     let schedule_start_time = 1;
@@ -52,4 +53,8 @@ window.onload = function() {
         if(ssm > schedule_times[8][1]) status.innerHTML = "Status: after school";
     }
     setInterval(function(){ update_status(); }, 500);
+    
+    edit_schedule.onclick = function() {
+        alert('test');
+    };
 };
