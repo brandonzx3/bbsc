@@ -3,7 +3,7 @@ window.onload = function() {
   let loadNote = document.querySelector("#loadNote");
   let storageCapability;
   let noteName;
-  const content = document.querySelector("#content")
+  const content = document.querySelector("#content");
 
   if (typeof Storage !== "undefined") {
     //load
@@ -15,16 +15,16 @@ saveNote.onclick = function () {
   noteName = document.getElementById("noteName").value;
   localStorage.setItem(noteName, content.innerHTML);
   alert("Note Saved As " + noteName);
-}
+};
 
 loadNote.onclick = function () {
   noteName = document.getElementById("noteName").value;
   if (storageCapability == true) {
-    content.innerHTML = localStorage.getItem(noteName)
+    content.innerHTML = localStorage.getItem(noteName);
   } else {
-    alert("Error: Unable to access note")
-  };
-}
+    alert("Error: Unable to access note");
+  }
+};
 
     //save
 /*    setInterval(function() {
