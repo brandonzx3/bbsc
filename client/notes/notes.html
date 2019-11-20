@@ -1,24 +1,40 @@
 <html>
-    <head>
-        <title>notes</title>
-        <link rel="stylesheet", href="notes.css">
-        <script src="notes.js"></script>
-    </head>
-    <body>
-        <div id="grid">
-            <div id="topbar">
-                <h1>notes</h1>
-            </div>
-            <div id="sidebar">
-                <a href="../schedule/schedule.html">back to main page</a> 
-                <br>
-                <br>
-                <br>
-                <button>New Note</button>
-            </div>
-            <div id="content" contenteditable="true">
 
-            </div>
+<head>
+    <title>notes</title>
+    <link rel="stylesheet" , href="notes.css">
+    <script src="notes.js"></script>
+</head>
+
+<body>
+    <div id="grid">
+        <div id="topbar">
+            <h1>notes</h1>
         </div>
-    </body>
+
+        <div id="content" contenteditable="true">
+        </div>
+
+        <div id="sidebar">
+            <a href="../schedule/schedule.html">back to main page</a>
+            <br>
+            <br>
+            <br>
+            <div>
+                    <form class="form-style-2">
+                        <h2>Save Note</h2>
+                        <input type="text" id="noteName" size="12" placeholder="Note Name"><br>
+                        <input type="button" id="saveNote" value="Save Note"><br>
+                        <input type="button" id="loadNote" value="Load Note">
+                        <input type="button" onclick="localStorage.clear();" value="Clear All Local Storage">
+                    </form>
+                </div>
+
+
+        </div>
+    </div>
+    
+    </div>
+</body>
+
 </html>
