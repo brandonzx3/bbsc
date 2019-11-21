@@ -7,24 +7,32 @@ window.onload = function() {
   let noteName;
   const content = document.querySelector("#content");
 
+  var regex = /^\s*$/ ;
+
   if (typeof Storage !== "undefined") {
     //load
     storageCapability = true;
     content.innerHTML = localStorage.getItem("content");
+  } else {
+    alert("your browser does not support local storage, your progress will not be saved")
   }
 
 saveNote.onclick = function () {
   noteName = document.getElementById("noteName").value;
-  localStorage.setItem(noteName, content.innerHTML);
-  alert("Note Saved As " + noteName);
+  if(!regex.test(noteName)) {
+    localStorage.setItem(noteName, content.innerHTML);
+    alert("Note Saved As " + noteName);
+  } else {
+    alert("enter a name");
+  }
 };
 
 loadNote.onclick = function () {
   noteName = document.getElementById("noteName").value;
-  if (storageCapability === true) {
+  if(!regex.test(noteName)) {
     content.innerHTML = localStorage.getItem(noteName);
   } else {
-    alert("Error: Unable to access note");
+    alert("enter a name");
   }
 };
 
