@@ -67,11 +67,9 @@ window.onload = function() {
     
     edit_button.onclick = function() {
         if(edit_schedule.style.display === "none") {
-            edit_schedule.style.display = "block";
-            edit_button.innerHTML = "Save Schedule";
+            edit_schedule.style.display = "inline-block";
         } else {
             edit_schedule.style.display = "none";
-            edit_button.innerHTML = "Edit Schedule";
         }
     };
 };
