@@ -1,8 +1,13 @@
 window.onload = function() {
     const status = document.querySelector("#status");
-    const edit_schedule = document.querySelector("#edit_button");
+    const edit_button = document.querySelector("#edit_button");
+
+    const edit_schedule = document.querySelector("#edit_schedule");
+    const schedule = document.querySelector("#grid");
 
     status.innerHTML = "Fetching status...";
+
+    edit_schedule.style.display = "none";
 
     function elapsed_from_seconds(seconds) {
         const hours = Math.floor(seconds / (60 * 60));
@@ -60,7 +65,13 @@ window.onload = function() {
     }
     setInterval(function(){ update_status(); }, 500);
     
-    edit_schedule.onclick = function() {
-        alert('test');
+    edit_button.onclick = function() {
+        if(edit_schedule.style.display === "none") {
+            edit_schedule.style.display = "block";
+            edit_button.innerHTML = "Save Schedule";
+        } else {
+            edit_schedule.style.display = "none";
+            edit_button.innerHTML = "Edit Schedule";
+        }
     };
 };
