@@ -21,20 +21,29 @@
             <br>
             <br>
             <div>
-                    <form class="form-style-2">
-                        <h2>Save Note</h2>
-                        <input type="text" id="noteName" size="12" placeholder="Note Name"><br>
-                        <input type="button" id="newNote" value="New Note"><br>
-                        <input type="button" id="saveNote" value="Save Note"><br>
-                        <input type="button" id="loadNote" value="Load Note">
-                        <input type="button" id="clear" value="Clear All Local Storage">
-                    </form>
-                </div>
+                <form class="form-style-2">
+                    <h2>Save Note</h2>
+                    <input type="text" id="noteName" size="12" placeholder="Note Name"><br>
+                    <div class="dropdown">
+                        <button onclick="dropBtnFunction()" class="dropbtn">Dropdown</button>
+                        <div id="noteDropDown" class="dropdown-content">
+                            <a onClick="">Home</a>
+                            <a href="#about">About</a>
+                            <a href="#contact">Contact</a>
+                        </div>
+                    </div> <br>
+                    <input type="button" id="newNote" value="New Note"><br>
+                    <input type="button" id="saveNote" value="Save Note"><br>
+                    <input type="button" id="loadNote" value="Load Note">
+                    <input type="button" id="clear" value="Clear All Local Storage">
+                    <input type="button" onclick="console.log(noteList);" value="Console.log noteList">
+                </form>
+            </div>
 
 
         </div>
     </div>
-    
+
     </div>
 </body>
 
