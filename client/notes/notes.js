@@ -12,7 +12,7 @@ window.onload = function() {
     noteList = [];
   } else {
     noteList = localStorage.getItem(noteList);
-  };
+  }
 
   if (typeof Storage !== "undefined") {
     storageCapability = true;
@@ -31,6 +31,7 @@ window.onload = function() {
     noteName = document.getElementById("noteName").value;
     if (!regex.test(noteName)) {
       localStorage.setItem(noteName, content.innerHTML);
+      
       alert("Note Saved As " + noteName);
       noteListUpdate();
     } else {
@@ -54,24 +55,40 @@ window.onload = function() {
     }
   };
 
-  let noteListUpdate = function (noteName) {
+  let noteListUpdate = function(noteName) {
     let noteListLength = noteList.length;
     noteList.push(noteName);
-    console.log(noteList, noteName)
-    localStorage.setItem(noteList, noteList);
+    
     for (i = 0; i < noteListLength; i++) {
       if (i == 0) {
         i++;
-      } else {}
-      console.log(i);
+      } else {
+      }
       let newNoteElement = document.createElement("a");
       let text = document.createTextNode(noteList[i]);
       newNoteElement.appendChild(text);
-      let noteDiv = document.getElementById("noteDiv");
-      if(newNoteElement == undefined || null) {
+      let noteDiv = document.getElementById("noteDropDown");
+      if (newNoteElement == undefined || null) {
       } else {
         noteDiv.appendChild(newNoteElement);
       }
-    };
-  }
+    }
+  };
+
+  fullNoteListUpdate.onclick = function(noteList) {
+    console.log(noteList);
+    for (i = 0; i < noteList.length; i++) {
+      if (i === 0) {
+      } else {
+        let newNoteElement = document.createElement("a");
+        let text = document.createTextNode(noteList[i]);
+        newNoteElement.appendChild(text);
+        let noteDiv = document.getElementById("noteDropDown");
+        if (newNoteElement == undefined || null) {
+        } else {
+          noteDiv.appendChild(newNoteElement);
+        }
+      }
+    }
+  };
 };
