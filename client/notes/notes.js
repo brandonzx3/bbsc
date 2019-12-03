@@ -7,7 +7,7 @@ window.onload = function() {
   const content = document.querySelector("#content");
   var regex = /^\s*$/;
 
-  if (localStorage.getItem(noteList) == null || undefined) {
+  if (localStorage.getItem(noteList.length) == null || undefined) {
     console.log("No Notes Have Been Previously Saved");
     noteList = [];
   } else {
@@ -15,7 +15,6 @@ window.onload = function() {
   }
 
   if (typeof Storage !== "undefined") {
-    storageCapability = true;
   } else {
     alert(
       "Warning: Your browser does not support local storage, your progress will not be saved"
@@ -28,10 +27,11 @@ window.onload = function() {
   };
 
   saveNote.onclick = function() {
+    console.log("re")
     noteName = document.getElementById("noteName").value;
     if (!regex.test(noteName)) {
       localStorage.setItem(noteName, content.innerHTML);
-      
+      updateLocalStorageNoteList(noteName);
       alert("Note Saved As " + noteName);
       noteListUpdate();
     } else {
@@ -56,39 +56,19 @@ window.onload = function() {
   };
 
   let noteListUpdate = function(noteName) {
+    for (i = 0; i < noteListLength; i++) {
+      if (noteList == undefined || null) {
+        
+      } else if (noteList[i] == undefined || null) {
+        delete noteList [i];
+      } else if (noteList[i] == string) {
+
+      } else {
+
+      }
     let noteListLength = noteList.length;
     noteList.push(noteName);
-    
-    for (i = 0; i < noteListLength; i++) {
-      if (i == 0) {
-        i++;
-      } else {
-      }
-      let newNoteElement = document.createElement("a");
-      let text = document.createTextNode(noteList[i]);
-      newNoteElement.appendChild(text);
-      let noteDiv = document.getElementById("noteDropDown");
-      if (newNoteElement == undefined || null) {
-      } else {
-        noteDiv.appendChild(newNoteElement);
-      }
-    }
-  };
-
-  fullNoteListUpdate.onclick = function(noteList) {
-    console.log(noteList);
-    for (i = 0; i < noteList.length; i++) {
-      if (i === 0) {
-      } else {
-        let newNoteElement = document.createElement("a");
-        let text = document.createTextNode(noteList[i]);
-        newNoteElement.appendChild(text);
-        let noteDiv = document.getElementById("noteDropDown");
-        if (newNoteElement == undefined || null) {
-        } else {
-          noteDiv.appendChild(newNoteElement);
-        }
-      }
-    }
-  };
+    };
+  }
 };
+
