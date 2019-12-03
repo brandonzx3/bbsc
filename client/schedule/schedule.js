@@ -5,8 +5,6 @@ window.onload = function() {
     const edit_schedule = document.querySelector("#edit_schedule");
     const schedule = document.querySelector("#grid");
 
-    status.innerHTML = "Fetching status...";
-
     edit_schedule.style.display = "none";
 
     function elapsed_from_seconds(seconds) {
@@ -63,13 +61,17 @@ window.onload = function() {
         }
         if(ssm > schedule_times[8][1]) status.innerHTML = "Status: after school";
     }
-    setInterval(function(){ update_status(); }, 500);
+    setInterval(function(){ update_status(); }, 400);
     
     edit_button.onclick = function() {
         if(edit_schedule.style.display === "none") {
             edit_schedule.style.display = "inline-block";
+            schedule.style.display = "none";
+            edit_button.innerHTML = "Save Schedule";
         } else {
             edit_schedule.style.display = "none";
+            edit_button.innerHTML = "Edit Schedule";
+            schedule.style.display = "inline-block";
         }
     };
 };
