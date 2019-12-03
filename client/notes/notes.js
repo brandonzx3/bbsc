@@ -7,12 +7,12 @@ window.onload = function() {
   const content = document.querySelector("#content");
   var regex = /^\s*$/;
 
-  if (localStorage.getItem(noteList.length) == null || undefined) {
+  /*if (localStorage.getItem(noteList.length) == null || undefined) {
     console.log("No Notes Have Been Previously Saved");
     noteList = [];
   } else {
     noteList = localStorage.getItem(noteList);
-  }
+  }*/
 
   if (typeof Storage !== "undefined") {
   } else {
