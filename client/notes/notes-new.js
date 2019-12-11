@@ -9,7 +9,7 @@ window.onload = function () {
 
   if (typeof Storage !== undefined) {
   } else {
-    alert("Warning: Your Browser Does Not Support Local Storage. Your Notes Will Not Be Saved.")
+    alert("Warning: Your Browser Does Not Support Local Storage. Your Notes Will Not Be Saved.");
   }
 
 //Save Functionality

@@ -41,25 +41,27 @@ window.onload = function() {
         ssm += time_offset;
         
         //weekend
-        if(day === 6 || day ===0) {
+        if(day === 6 || day === 0) {
             status.innerHTML = "Status: Weekend";
         }
+        else {
+            //before school
+            if(ssm < schedule_times[schedule_start_time][0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[schedule_start_time][0] - ssm)}`;
         
-        //before school
-        if(ssm < schedule_times[schedule_start_time][0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[schedule_start_time][0] - ssm)}`;
-        
-        for (let i = schedule_start_time; i < schedule_times.length; i++) {
-            //In class
-            if (schedule_times[i][0] <= ssm && ssm < schedule_times[i][1])
-            status.innerHTML = `Status: In class. Class ends in ${elapsed_from_seconds(schedule_times[i][1] - ssm)}`;
-            //Passing period
-            const ip = i + 1;
-            if (ip < schedule_times.length) {
-                if (schedule_times[i][1] <= ssm && ssm < schedule_times[ip][0])
-                status.innerHTML = `Status: Heading to Class. Class starts in ${elapsed_from_seconds(schedule_times[ip][0] - ssm)}`;
-            } 
+            for (let i = schedule_start_time; i < schedule_times.length; i++) {
+                //In class
+                if (schedule_times[i][0] <= ssm && ssm < schedule_times[i][1])
+                status.innerHTML = `Status: In class. Class ends in ${elapsed_from_seconds(schedule_times[i][1] - ssm)}`;
+                //Passing period
+                const ip = i + 1;
+                if (ip < schedule_times.length) {
+                    if (schedule_times[i][1] <= ssm && ssm < schedule_times[ip][0]) {
+                        status.innerHTML = `Status: Heading to Class. Class starts in ${elapsed_from_seconds(schedule_times[ip][0] - ssm)}`;
+                    }
+                } 
+            }
+            if(ssm > schedule_times[8][1]) status.innerHTML = "Status: after school";
         }
-        if(ssm > schedule_times[8][1]) status.innerHTML = "Status: after school";
     }
     setInterval(function(){ update_status(); }, 400);
     
