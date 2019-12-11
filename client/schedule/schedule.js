@@ -74,6 +74,7 @@ window.onload = function() {
             edit_schedule.style.display = "none";
             edit_button.innerHTML = "Edit Schedule";
             schedule.style.display = "inline-block";
+            edit_button.innerHTML = "edit Schedue";
         }
     };
 };
