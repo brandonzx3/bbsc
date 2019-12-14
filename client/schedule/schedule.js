@@ -13,18 +13,6 @@ window.onload = function() {
 
     edit_schedule.style.display = "none";
 
-    if(typeof(Storage) !== "undifined") {
-        //save
-        setInterval(function() {
-            localStorage.setItem("schedule", table.innerHTML);
-        }, 100);
-        
-        //load
-        table.innerHTML = localStorage.getItem("schedule");
-    } else {
-        alert("your browser does not support web storage");
-    }
-
     function elapsed_from_seconds(seconds) {
         const hours = Math.floor(seconds / (60 * 60));
         seconds -= hours * (60 * 60);
