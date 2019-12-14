@@ -6,6 +6,9 @@ window.onload = function () {
   let newNote = document.querySelector("#newNote");
   let noteInput = document.querySelector("#noteInput");
   let deleteNote = docuement.querySelector("#deleteNote");
+  let noteContent = document.getElementById('noteContent').value = "";
+  let noteName = document.getElementById('noteName').value = "";
+  let currentNoteSaved = {name:""}
 
   if (typeof Storage !== undefined) {
   } else {
@@ -14,7 +17,9 @@ window.onload = function () {
 
 //Save Functionality
   saveNote = function () {
-
+    if (!regex.test(noteName)) {
+      localStorage.setItem(noteContent, content)
+    }
   }
 //Load Functionality
   loadNote = function () {
