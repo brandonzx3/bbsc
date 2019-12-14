@@ -10,11 +10,26 @@
             <a href="../notes/notes.html">Notes</a>
         </div>
         <div id="status">Fetching Status...</div>
-        <div id="grid">
-            
+        <div id="schedule">
+            <table border="1" id="table">
+                <tr>
+                    <th>Class</th>
+                    <th>Room #</th>
+                    <th>Start Time</th>
+                </tr>
+            </table>
         </div>
         <div id="edit">
-            <iframe src=edit_schedule.html id="edit_schedule"></iframe> <br>
+            <div id="tab">
+                Class: <input type="text" id="class">
+                Room: <input type="text" id="room">
+
+                <button id="table_add">Add</button>
+                <button id="table_edit">Edit</button>
+                <button id="table_remove">Remove</button>
+            </div>
+            <br>
+            <br>
             <button id="edit_button">Edit Schedule</button>
         </div>
     </body>

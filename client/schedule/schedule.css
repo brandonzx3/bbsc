@@ -5,6 +5,13 @@ body{
     margin: 0%;
 }
 
+#table {
+    margin-top: 50px;
+    margin-left:auto; 
+    margin-right:auto;
+    text-align: center;
+  }
+
 #topbar {
     height: 10%;
     background-color: red;
@@ -30,7 +37,7 @@ body{
     margin: 20px;
 }
 
-#edit_schedule {
+#tab {
     display: none;
 }
 

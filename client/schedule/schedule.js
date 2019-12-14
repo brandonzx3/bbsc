@@ -2,10 +2,28 @@ window.onload = function() {
     const status = document.querySelector("#status");
     const edit_button = document.querySelector("#edit_button");
 
-    const edit_schedule = document.querySelector("#edit_schedule");
-    const schedule = document.querySelector("#grid");
+    const edit_schedule = document.querySelector("#tab");
+    const schedule = document.querySelector("#schedule");
+
+    const schedule_add_button = document.querySelector("#table_add");
+    const schedule_edit_button = document.querySelector("#table_edit");
+    const schedule_remove_button = document.querySelector("#table_remove");
+
+    const table = document.querySelector("#table");
 
     edit_schedule.style.display = "none";
+
+    if(typeof(Storage) !== "undifined") {
+        //save
+        setInterval(function() {
+            localStorage.setItem("schedule", table.innerHTML);
+        }, 100);
+        
+        //load
+        table.innerHTML = localStorage.getItem("schedule");
+    } else {
+        alert("your browser does not support web storage");
+    }
 
     function elapsed_from_seconds(seconds) {
         const hours = Math.floor(seconds / (60 * 60));
@@ -39,42 +57,59 @@ window.onload = function() {
         let day = date.getDay();
         
         ssm += time_offset;
+
+        //before school
+        if(ssm < schedule_times[schedule_start_time][0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[schedule_start_time][0] - ssm)}`;
         
+        for (let i = schedule_start_time; i < schedule_times.length; i++) {
+            //In class
+            if (schedule_times[i][0] <= ssm && ssm < schedule_times[i][1])
+            status.innerHTML = `Status: In class. Class ends in ${elapsed_from_seconds(schedule_times[i][1] - ssm)}`;
+            //Passing period
+            const ip = i + 1;
+            if (ip < schedule_times.length) {
+                if (schedule_times[i][1] <= ssm && ssm < schedule_times[ip][0]) {
+                    status.innerHTML = `Status: Heading to Class. Class starts in ${elapsed_from_seconds(schedule_times[ip][0] - ssm)}`;
+                }
+            }
+        }
+        //after school
+        if(ssm > schedule_times[8][1]) status.innerHTML = "Status: after school";
+
         //weekend
         if(day === 6 || day === 0) {
             status.innerHTML = "Status: Weekend";
         }
-        else {
-            //before school
-            if(ssm < schedule_times[schedule_start_time][0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[schedule_start_time][0] - ssm)}`;
-        
-            for (let i = schedule_start_time; i < schedule_times.length; i++) {
-                //In class
-                if (schedule_times[i][0] <= ssm && ssm < schedule_times[i][1])
-                status.innerHTML = `Status: In class. Class ends in ${elapsed_from_seconds(schedule_times[i][1] - ssm)}`;
-                //Passing period
-                const ip = i + 1;
-                if (ip < schedule_times.length) {
-                    if (schedule_times[i][1] <= ssm && ssm < schedule_times[ip][0]) {
-                        status.innerHTML = `Status: Heading to Class. Class starts in ${elapsed_from_seconds(schedule_times[ip][0] - ssm)}`;
-                    }
-                } 
-            }
-            if(ssm > schedule_times[8][1]) status.innerHTML = "Status: after school";
-        }
     }
-    setInterval(function(){ update_status(); }, 400);
+    setInterval(function(){ update_status(); }, 500);
     
     edit_button.onclick = function() {
         if(edit_schedule.style.display === "none") {
             edit_schedule.style.display = "inline-block";
-            schedule.style.display = "none";
             edit_button.innerHTML = "Save Schedule";
         } else {
             edit_schedule.style.display = "none";
             edit_button.innerHTML = "Edit Schedule";
-            schedule.style.display = "inline-block";
-            edit_button.innerHTML = "edit Schedue";
         }
     };
+
+    schedule_add_button.onclick = function() {
+        add_table_row();
+    }
+
+    var table_start_times = ["0", "8:00:00 AM", "8:55:00 AM", "9:50:00 AM", "10:30:00 AM", "11:25:00 AM", "12:20:00 PM", "1:15:00 PM", "2:10:00 PM"];
+
+    function add_table_row() {
+        var table = document.querySelector("#table"),
+            new_row = table.insertRow(table.length),
+            cell1 = new_row.insertCell(0),
+            cell2 = new_row.insertCell(1),
+            cell3 = new_row.insertCell(2),
+            schedule_class = document.querySelector("#class").value,
+            schedule_room = document.querySelector("#room").value;
+
+        cell1.innerHTML = schedule_class;
+        cell2.innerHTML = schedule_room;
+        cell3.innerHTML = table_start_times[table.rows.length].toString(); 
+    }
 };
