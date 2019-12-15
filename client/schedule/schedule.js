@@ -13,6 +13,13 @@ window.onload = function() {
 
     edit_schedule.style.display = "none";
 
+    if(localStorage.getItem("schedule") != null) {
+        table.innerHTML = localStorage.getItem("schedule");
+    } else {
+        table.innerHTML = '<tbody><tr><th>Class</th><th>Room #</th><th>Start Time</th></tr></tbody>';
+    }
+    
+
     function elapsed_from_seconds(seconds) {
         const hours = Math.floor(seconds / (60 * 60));
         seconds -= hours * (60 * 60);
@@ -22,7 +29,6 @@ window.onload = function() {
         if (minutes > 0) return `${minutes} minutes and ${seconds} seconds`;
         return seconds + " seconds";
     }
-
 
     const schedule_times = [
         [24600, 28200], //6:50 7:50
@@ -78,6 +84,7 @@ window.onload = function() {
         } else {
             edit_schedule.style.display = "none";
             edit_button.innerHTML = "Edit Schedule";
+            localStorage.setItem("schedule", table.innerHTML);
         }
     };
 
@@ -98,6 +105,6 @@ window.onload = function() {
 
         cell1.innerHTML = schedule_class;
         cell2.innerHTML = schedule_room;
-        cell3.innerHTML = table_start_times[table.rows.length].toString(); 
+        cell3.innerHTML = table_start_times[table.rows.length].toString();
     }
 };
