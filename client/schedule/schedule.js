@@ -11,6 +11,8 @@ window.onload = function() {
 
     const table = document.querySelector("#table");
 
+    const regex = /^\s*$/;
+
     edit_schedule.style.display = "none";
 
     if(localStorage.getItem("schedule") != null) {
@@ -89,22 +91,30 @@ window.onload = function() {
     };
 
     schedule_add_button.onclick = function() {
-        add_table_row();
+        if(!regex.test(document.querySelector("#class")).value && !regex.test(document.querySelector("#room")).value) {
+            add_table_row();
+        } else {
+            alert("please enter a name");
+        }
     }
 
-    var table_start_times = ["0", "8:00:00 AM", "8:55:00 AM", "9:50:00 AM", "10:30:00 AM", "11:25:00 AM", "12:20:00 PM", "1:15:00 PM", "2:10:00 PM"];
+    var table_start_times = ["8:00:00 AM", "8:55:00 AM", "9:50:00 AM", "10:30:00 AM", "11:25:00 AM", "12:20:00 PM", "1:15:00 PM", "2:10:00 PM"];
 
     function add_table_row() {
         var table = document.querySelector("#table"),
-            new_row = table.insertRow(table.length),
-            cell1 = new_row.insertCell(0),
-            cell2 = new_row.insertCell(1),
-            cell3 = new_row.insertCell(2),
-            schedule_class = document.querySelector("#class").value,
-            schedule_room = document.querySelector("#room").value;
+        new_row = table.insertRow(table.length),
+        cell1 = new_row.insertCell(0),
+        cell2 = new_row.insertCell(1),
+        cell3 = new_row.insertCell(2),
+        schedule_class = document.querySelector("#class").value,
+        schedule_room = document.querySelector("#room").value;
 
         cell1.innerHTML = schedule_class;
         cell2.innerHTML = schedule_room;
-        cell3.innerHTML = table_start_times[table.rows.length].toString();
+        if(table.rows.length > 9) {
+            cell3.innerHTML = "When the teacher says leave";
+        } else {
+            cell3.innerHTML = table_start_times[table.rows.length - 2].toString();
+        }
     }
 };
