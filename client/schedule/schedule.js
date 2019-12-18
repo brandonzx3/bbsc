@@ -1,4 +1,6 @@
-window.onload = function() {
+window.onload = function(err) {
+    var rindex;
+
     const status = document.querySelector("#status");
     const edit_button = document.querySelector("#edit_button");
 
@@ -77,7 +79,11 @@ window.onload = function() {
             status.innerHTML = "Status: Weekend";
         }
     }
-    setInterval(function(){ update_status(); }, 500);
+    try {
+        setInterval(function(){ update_status(); }, 500);
+    } catch (err) {
+        starts.innerHTML = "error fetching status";
+    }
     
     edit_button.onclick = function() {
         if(edit_schedule.style.display === "none") {
@@ -94,8 +100,16 @@ window.onload = function() {
         if(!regex.test(document.querySelector("#class")).value && !regex.test(document.querySelector("#room")).value) {
             add_table_row();
         } else {
-            alert("please enter a name");
+            alert("this field cannot br left blank");
         }
+    }
+
+    schedule_remove_button.onclick = function() {
+        remove_table_row();
+    }
+
+    schedule_edit_button.onclick = function() {
+        edit_table_row();
     }
 
     var table_start_times = ["8:00:00 AM", "8:55:00 AM", "9:50:00 AM", "10:30:00 AM", "11:25:00 AM", "12:20:00 PM", "1:15:00 PM", "2:10:00 PM"];
@@ -116,5 +130,30 @@ window.onload = function() {
         } else {
             cell3.innerHTML = table_start_times[table.rows.length - 2].toString();
         }
+        select_row_to_input();
     }
-};
+
+    function select_row_to_input() {
+        for(var i = 1; i < table.rows.length; i++) {
+            table.rows[i].onclick = function() {
+                // get the seected row index
+                rindex = this.rowIndex;
+                document.getElementById("class").value = this.cells[0].innerHTML;
+                document.getElementById("room").value = this.cells[1].innerHTML;
+            };
+        }
+    }
+
+    function edit_table_row() {
+        var schedule_class = document.getElementById("class").value,
+        schedule_room = document.getElementById("room").value;
+        table.rows[rindex].cells[0].innerHTML = schedule_class;
+        table.rows[rindex].cells[1].innerHTML = schedule_room;
+    }
+
+    function remove_table_row() {
+        table.deleteRow(rindex);
+        document.getElementById("class").value = "";
+        document.getElementById("room").value = "";
+    }
+}
