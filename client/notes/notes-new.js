@@ -1,12 +1,11 @@
 window.onload = function () {
   var regex = /^\s*$/;
-  const content = document.querySelector("#content")
   let saveNote = document.querySelector("#saveNote");
   let loadNote = document.querySelector("#loadNote");
   let newNote = document.querySelector("#newNote");
   let noteInput = document.querySelector("#noteInput");
-  let deleteNote = docuement.querySelector("#deleteNote");
-  let noteContent = document.getElementById('noteContent').value = "";
+  let deleteNote = document.querySelector("#deleteNote");
+  const noteContent = document.querySelector("#content");
   let noteName = document.getElementById('noteName').value = "";
   let currentNoteSaved = {name:""}
 
@@ -18,7 +17,10 @@ window.onload = function () {
 //Save Functionality
   saveNote = function () {
     if (!regex.test(noteName)) {
-      localStorage.setItem(noteContent, content)
+      localStorage.setItem(noteContent, content);
+      alert('Your Current Note Has Been Saved As' + noteName);
+    } else {
+
     }
   }
 //Load Functionality
