@@ -1,11 +1,10 @@
-window.onload = function(err) {
+window.onload = function() {
     var rindex;
 
     const status = document.querySelector("#status");
     const edit_button = document.querySelector("#edit_button");
 
     const edit_schedule = document.querySelector("#tab");
-    const schedule = document.querySelector("#schedule");
 
     const schedule_add_button = document.querySelector("#table_add");
     const schedule_edit_button = document.querySelector("#table_edit");
@@ -50,40 +49,42 @@ window.onload = function(err) {
     let schedule_start_time = 1;
 
     function update_status() {
-        const date = new Date();
-        let ssm = (date.getHours() * 3600) + (date.getMinutes() * 60) + date.getSeconds();
-        let day = date.getDay();
+        try {
+            const date = new Date();
+            let ssm = (date.getHours() * 3600) + (date.getMinutes() * 60) + date.getSeconds();
+            let day = date.getDay();
         
-        ssm += time_offset;
+            ssm += time_offset;
 
-        //before school
-        if(ssm < schedule_times[schedule_start_time][0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[schedule_start_time][0] - ssm)}`;
+            //before school
+            if(ssm < schedule_times[schedule_start_time][0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[schedule_start_time][0] - ssm)}`;
         
-        for (let i = schedule_start_time; i < schedule_times.length; i++) {
-            //In class
-            if (schedule_times[i][0] <= ssm && ssm < schedule_times[i][1])
-            status.innerHTML = `Status: In class. Class ends in ${elapsed_from_seconds(schedule_times[i][1] - ssm)}`;
-            //Passing period
-            const ip = i + 1;
-            if (ip < schedule_times.length) {
-                if (schedule_times[i][1] <= ssm && ssm < schedule_times[ip][0]) {
-                    status.innerHTML = `Status: Heading to Class. Class starts in ${elapsed_from_seconds(schedule_times[ip][0] - ssm)}`;
+            for (let i = schedule_start_time; i < schedule_times.length; i++) {
+                //In class
+                if (schedule_times[i][0] <= ssm && ssm < schedule_times[i][1])
+                status.innerHTML = `Status: In class. Class ends in ${elapsed_from_seconds(schedule_times[i][1] - ssm)}`;
+                //Passing period
+                const ip = i + 1;
+                if (ip < schedule_times.length) {
+                    if (schedule_times[i][1] <= ssm && ssm < schedule_times[ip][0]) {
+                        status.innerHTML = `Status: Heading to Class. Class starts in ${elapsed_from_seconds(schedule_times[ip][0] - ssm)}`;
+                    }
                 }
             }
-        }
-        //after school
-        if(ssm > schedule_times[8][1]) status.innerHTML = "Status: after school";
+            //after school
+            if(ssm > schedule_times[8][1]) status.innerHTML = "Status: after school";
 
-        //weekend
-        if(day === 6 || day === 0) {
-            status.innerHTML = "Status: Weekend";
+            //weekend
+            if(day === 6 || day === 0) {
+                status.innerHTML = "Status: Weekend";
+            }
+        } catch (err) {
+            console.log(err);
+            status.innerHTML = "error fetching status";
         }
     }
-    try {
-        setInterval(function(){ update_status(); }, 500);
-    } catch (err) {
-        starts.innerHTML = "error fetching status";
-    }
+
+    setInterval(function(){ update_status(); }, 500);
     
     edit_button.onclick = function() {
         if(edit_schedule.style.display === "none") {
