@@ -19,8 +19,10 @@ window.onload = function () {
     if (!regex.test(noteName)) {
       localStorage.setItem(noteContent, content);
       alert('Your Current Note Has Been Saved As' + noteName);
+    } else if () {
+      alert('Please Enter A Vaild Note Name');
     } else {
-
+      
     }
   }
 //Load Functionality
