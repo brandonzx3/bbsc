@@ -84,7 +84,7 @@ window.onload = function() {
         }
     }
 
-    setInterval(function(){ update_status(); }, 500);
+    setInterval(function(){ update_status(); }, 300);
     
     edit_button.onclick = function() {
         if(edit_schedule.style.display === "none") {
@@ -98,10 +98,10 @@ window.onload = function() {
     };
 
     schedule_add_button.onclick = function() {
-        if(!regex.test(document.querySelector("#class")).value && !regex.test(document.querySelector("#room")).value) {
+        if(!regex.test(document.querySelector("#class").value) && !regex.test(document.querySelector("#room").value)) {
             add_table_row();
         } else {
-            alert("this field cannot br left blank");
+            alert("this field cannot be left blank");
         }
     }
 
@@ -110,7 +110,11 @@ window.onload = function() {
     }
 
     schedule_edit_button.onclick = function() {
-        edit_table_row();
+        if(!regex.test(document.querySelector("#class").value) && !regex.test(document.querySelector("#room").value)) {
+            edit_table_row();
+        } else {
+            alert("this field cannot be left blank");
+        }
     }
 
     var table_start_times = ["8:00:00 AM", "8:55:00 AM", "9:50:00 AM", "10:30:00 AM", "11:25:00 AM", "12:20:00 PM", "1:15:00 PM", "2:10:00 PM"];
@@ -137,7 +141,7 @@ window.onload = function() {
     function select_row_to_input() {
         for(var i = 1; i < table.rows.length; i++) {
             table.rows[i].onclick = function() {
-                // get the seected row index
+                //get the seected row index
                 rindex = this.rowIndex;
                 document.getElementById("class").value = this.cells[0].innerHTML;
                 document.getElementById("room").value = this.cells[1].innerHTML;
