@@ -119,6 +119,7 @@ window.onload = function() {
 
     var table_start_times = ["8:00:00 AM", "8:55:00 AM", "9:50:00 AM", "10:30:00 AM", "11:25:00 AM", "12:20:00 PM", "1:15:00 PM", "2:10:00 PM"];
 
+
     function add_table_row() {
         var table = document.querySelector("#table"),
         new_row = table.insertRow(table.length),
@@ -157,8 +158,15 @@ window.onload = function() {
     }
 
     function remove_table_row() {
+        let cell3 = table.rows[rindex].cells[2];
         table.deleteRow(rindex);
         document.getElementById("class").value = "";
         document.getElementById("room").value = "";
+
+        if(table.rows.length > 9) {
+            cell3.innerHTML = "When the teacher says leave";
+        } else {
+            cell3.innerHTML = table_start_times[table.rows.length - 2].toString();
+        }
     }
 }
