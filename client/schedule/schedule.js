@@ -119,6 +119,15 @@ window.onload = function() {
 
     var table_start_times = ["8:00:00 AM", "8:55:00 AM", "9:50:00 AM", "10:30:00 AM", "11:25:00 AM", "12:20:00 PM", "1:15:00 PM", "2:10:00 PM"];
 
+    function calculate_start_times() {
+        for(var i = 1; i < table.rows.length; i++) {
+            if(table.rows.lenth > 9) {
+                table.rows[i].cells[2].innerHTML = "When the teacher says leave";
+            } else {
+                table.rows[i].cells[2].innerHTML = table_start_times[i - 1].toString();
+            }
+        }
+    }
 
     function add_table_row() {
         var table = document.querySelector("#table"),
@@ -128,14 +137,13 @@ window.onload = function() {
         cell3 = new_row.insertCell(2),
         schedule_class = document.querySelector("#class").value,
         schedule_room = document.querySelector("#room").value;
+        document.getElementById("class").value = "";
+        document.getElementById("room").value = "";
 
         cell1.innerHTML = schedule_class;
         cell2.innerHTML = schedule_room;
-        if(table.rows.length > 9) {
-            cell3.innerHTML = "When the teacher says leave";
-        } else {
-            cell3.innerHTML = table_start_times[table.rows.length - 2].toString();
-        }
+
+        calculate_start_times();
         select_row_to_input();
     }
 
@@ -155,18 +163,14 @@ window.onload = function() {
         schedule_room = document.getElementById("room").value;
         table.rows[rindex].cells[0].innerHTML = schedule_class;
         table.rows[rindex].cells[1].innerHTML = schedule_room;
+        document.getElementById("class").value = "";
+        document.getElementById("room").value = "";
     }
 
     function remove_table_row() {
-        let cell3 = table.rows[rindex].cells[2];
         table.deleteRow(rindex);
         document.getElementById("class").value = "";
         document.getElementById("room").value = "";
-
-        if(table.rows.length > 9) {
-            cell3.innerHTML = "When the teacher says leave";
-        } else {
-            cell3.innerHTML = table_start_times[table.rows.length - 2].toString();
-        }
+        calculate_start_times();
     }
 }
