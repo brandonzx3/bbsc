@@ -48,6 +48,7 @@ window.onload = function() {
     let time_offset = -4;
     let schedule_start_time = 1;
 
+    select_row_to_input();
     function update_status() {
         try {
             const date = new Date();
