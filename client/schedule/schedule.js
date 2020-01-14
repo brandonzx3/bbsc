@@ -1,5 +1,5 @@
 window.onload = function() {
-    var rindex;
+    var rindex = 1;
 
     const status = document.querySelector("#status");
     const edit_button = document.querySelector("#edit_button");
@@ -122,7 +122,7 @@ window.onload = function() {
 
     function calculate_start_times() {
         for(var i = 1; i < table.rows.length; i++) {
-            if(table.rows.lenth > 9) {
+            if(table.rows.length > 9) {
                 table.rows[i].cells[2].innerHTML = "When the teacher says leave";
             } else {
                 table.rows[i].cells[2].innerHTML = table_start_times[i - 1].toString();
@@ -144,8 +144,8 @@ window.onload = function() {
         cell1.innerHTML = schedule_class;
         cell2.innerHTML = schedule_room;
 
-        calculate_start_times();
         select_row_to_input();
+        calculate_start_times();
     }
 
     function select_row_to_input() {
@@ -155,7 +155,7 @@ window.onload = function() {
                 rindex = this.rowIndex;
                 document.getElementById("class").value = this.cells[0].innerHTML;
                 document.getElementById("room").value = this.cells[1].innerHTML;
-            };
+            }
         }
     }
 
