@@ -123,7 +123,7 @@ window.onload = function() {
     function calculate_start_times() {
         for(var i = 1; i < table.rows.length; i++) {
             if(table.rows.length > 9) {
-                table.rows[i].cells[2].innerHTML = "When the teacher says leave";
+                table.rows[i + 8].cells[2].innerHTML = "When the teacher says leave";
             } else {
                 table.rows[i].cells[2].innerHTML = table_start_times[i - 1].toString();
             }
@@ -135,9 +135,9 @@ window.onload = function() {
         new_row = table.insertRow(table.length),
         cell1 = new_row.insertCell(0),
         cell2 = new_row.insertCell(1),
-        cell3 = new_row.insertCell(2),
         schedule_class = document.querySelector("#class").value,
         schedule_room = document.querySelector("#room").value;
+        new_row.insertCell(2);
         document.getElementById("class").value = "";
         document.getElementById("room").value = "";
 
