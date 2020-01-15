@@ -25,7 +25,7 @@ body{
     background-color: rgb(150, 0, 0);
 }
 
-#content {
+#noteContent {
     grid-column: 2/9;
     padding: 10px;
     overflow-y: auto;
@@ -201,4 +201,3 @@ button:focus {outline:0;}
   .dropdown:hover .dropdown-content {display: block;}
   
   .dropdown:hover .dropbtn {background-color: #3e8e41;}
-  </style>

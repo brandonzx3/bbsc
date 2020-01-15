@@ -47,6 +47,7 @@ window.onload = function() {
 
     let time_offset = -4;
     let schedule_start_time = 1;
+    let has_0_hour = false;
 
     select_row_to_input();
     function update_status() {
@@ -54,7 +55,7 @@ window.onload = function() {
             const date = new Date();
             let ssm = (date.getHours() * 3600) + (date.getMinutes() * 60) + date.getSeconds();
             let day = date.getDay();
-        
+
             ssm += time_offset;
 
             //before school
@@ -81,7 +82,7 @@ window.onload = function() {
             }
         } catch (err) {
             console.log(err);
-            status.innerHTML = "error fetching status";
+            status.innerHTML = `error fetching status: ${err}`;
         }
     }
 
@@ -118,12 +119,16 @@ window.onload = function() {
         }
     }
 
-    var table_start_times = ["8:00:00 AM", "8:55:00 AM", "9:50:00 AM", "10:30:00 AM", "11:25:00 AM", "12:20:00 PM", "1:15:00 PM", "2:10:00 PM"];
+    var table_start_times = ["8:00:00 AM", "8:55:00 AM", "9:50:00 AM", "10:30:00 AM", "11:25:00 AM", "12:20:00 PM", "1:15:00 PM", "2:10:00 PM"]; //later pull times off of shchedule times and convert back to AM/PM
 
+    
     function calculate_start_times() {
+        let offest = 8; // adding 0 hour funtionality
+        let classes = 9;
+
         for(var i = 1; i < table.rows.length; i++) {
-            if(table.rows.length > 9) {
-                table.rows[i + 8].cells[2].innerHTML = "When the teacher says leave";
+            if(table.rows.length > classes) {
+                table.rows[i + offest].cells[2].innerHTML = "When the teacher says leave";
             } else {
                 table.rows[i].cells[2].innerHTML = table_start_times[i - 1].toString();
             }
