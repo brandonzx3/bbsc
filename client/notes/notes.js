@@ -1,74 +1,79 @@
+let notes = [];
+let tmpl_note_entry = null;
+let selected_note = null;
+
 window.onload = function() {
-  let saveNote = document.querySelector("#saveNote");
-  let loadNote = document.querySelector("#loadNote");
-  let noteName = document.querySelector("#noteName");
-  let clear = document.querySelector("#clear");
-  let noteList;
-  const content = document.querySelector("#content");
-  var regex = /^\s*$/;
+    //Pry out tempaltes
+    tmpl_note_entry = document.querySelector("#notes_list template").content.children[0].cloneNode(true);
 
-  /*if (localStorage.getItem(noteList.length) == null || undefined) {
-    console.log("No Notes Have Been Previously Saved");
-    noteList = [];
-  } else {
-    noteList = localStorage.getItem(noteList);
-  }*/
+    //Add event listeners
+    document.querySelector("#new_note").addEventListener("click", new_note);
 
-  if (typeof Storage !== "undefined") {
-  } else {
-    alert(
-      "Warning: Your browser does not support local storage, your progress will not be saved"
-    );
-  }
+    //Ctrl+S Keyboard Shortcut
+    window.addEventListener("keydown", saveShortcut);
 
-  newNote.onclick = function() {
-    content.innerHTML = "";
-    document.getElementById("noteName").value = "";
-  };
-
-  saveNote.onclick = function() {
-    console.log("re")
-    noteName = document.getElementById("noteName").value;
-    if (!regex.test(noteName)) {
-      localStorage.setItem(noteName, content.innerHTML);
-      updateLocalStorageNoteList(noteName);
-      alert("Note Saved As " + noteName);
-      noteListUpdate();
-    } else {
-      alert("Please enter a valid note name to save to");
-    }
-    noteListUpdate(noteName);
-  };
-
-  loadNote.onclick = function() {
-    noteName = document.getElementById("noteName").value;
-    if (!regex.test(noteName)) {
-      content.innerHTML = localStorage.getItem(noteName);
-    } else {
-      alert("Please enter a valid note name to load from");
-    }
-  };
-
-  clear.onclick = function() {
-    if (confirm("Are you sure you want to delete your notes?")) {
-      localStorage.clear();
-    }
-  };
-
-  let noteListUpdate = function(noteName) {
-    for (i = 0; i < noteListLength; i++) {
-      if (noteList == undefined || null) {
-        
-      } else if (noteList[i] == undefined || null) {
-        delete noteList [i];
-      } else if (noteList[i] == string) {
-
-      } else {
-
-      }
-    let noteListLength = noteList.length;
-    noteList.push(noteName);
-    };
-  }
+    //Load from local storage
+    
+    
+    render();
 };
 
+function new_note() {
+    save_note();
+    selected_note = notes.push({name: `Note ${notes.length + 1}`, id: (new Date()).valueOf()}) - 1;
+    render();
+}
+
+function save_note() {
+    if (selected_note === null) return;
+    const note = notes[selected_note];
+    note.name = document.querySelector("#note_name").value;
+    localStorage.setItem("notes", JSON.stringify(notes));
+    localStorage.setItem("note" + note.id, document.querySelector("#noteContent").innerHTML);
+}
+
+function render() {
+    const notes_list = document.querySelector("#notes_list");
+    notes_list.innerHTML = "";
+    notes.forEach((note, i) => {
+        const my_note = tmpl_note_entry.cloneNode(true);
+        my_note.innerText = note.name;
+        my_note.ref = i;
+        if (selected_note === i) my_note.classList.add("selected");
+        my_note.addEventListener("click", select_note);
+        notes_list.appendChild(my_note);
+    });
+    
+    const note_name = document.querySelector("#note_name");
+    if (selected_note === null) {
+      note_name.disabled = true;
+      note_name.value = "";
+    } else {
+      note_name.disabled = false;
+      note_name.value = notes[selected_note].name;
+    }
+
+    const note_content = document.querySelector("#noteContent");
+    if (selected_note === null) note_content.innerHTML = "";
+    else {
+      const content = localStorage.getItem("note" + selected_note.id);
+      if (content !== null && content !== undefined) note_content.innerHTML = content;
+    }
+}
+
+function saveShortcut (keyEvent) {
+    let key = keyEvent.key;
+    if (keyEvent.ctrlKey == true) {
+        if (key == 's') {
+            keyEvent.preventDefault();
+            save_note();
+            return false;
+        }
+    }
+}
+
+function select_note() {
+  save_note();
+  selected_note = this.ref;
+  render();
+}

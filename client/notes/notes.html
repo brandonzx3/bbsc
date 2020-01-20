@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>notes</title>
+    <title>Notes</title>
     <link rel="stylesheet" , href="notes.css">
     <script src="notes.js"></script>
 </head>
@@ -9,38 +9,25 @@
 <body>
     <div id="grid">
         <div id="topbar">
-            <h1>notes</h1>
+            <h1>Notes</h1>
         </div>
 
-        <div id="noteContent" contenteditable="true"></div>
+        <div id="noteContent" contenteditable="true">
+
+        </div>
 
         <div id="sidebar">
             <a href="../schedule/schedule.html">back to main page</a>
-            <br>
-            <br>
-            <br>
-            <div>
-                <form class="form-style-2">
-                    <h2>Save Note</h2>
-                    <input type="text" id="noteName" size="12" placeholder="Note Name"><br>
-                    <div class="dropdown">
-                        <button onclick="dropBtnFunction()" class="dropbtn">Dropdown</button>
-                        <div id="noteDropDown" class="dropdown-content">
-                        </div>
-                    </div> <br>
-                    <input type="button" id="newNote" value="New Note"><br>
-                    <input type="button" id="saveNote" value="Save Note"><br>
-                    <input type="button" id="loadNote" value="Load Note">
-                    <input type="button" id="fullNoteListUpdate" value="Update Notes">
-                    <input type="button" id="deleteNote" value="Clear All Local Storage">
-                    <input type="button" onclick="console.log(noteList);" value="Console.log noteList">
-                </form>
+            <div id="note_sidebar_pane">
+                <input type=text id="note_name" placeholder="Enter Note Name"/>
+                <button id="new_note">New</button>
+                <button id="delete_note">Delete</button>
+                <button id="save_note">Save</button>
             </div>
-
-
+            <div id="notes_list">
+                <template><div class="note_entry">%s</div></template>
+            </div>
         </div>
-    </div>
-
     </div>
 </body>
 
