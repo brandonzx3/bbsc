@@ -2,6 +2,8 @@ const tabs = document.querySelector("#tabs");
 const iframes = document.querySelector("#iframes");
 const max_tab = tabs.children.length - 1;
 
+let selected_tab = 0;
+
 //Create iframes from tabs
 for (let i = 0; i <= max_tab; i++) {
     const tab = tabs.children[i];
@@ -11,13 +13,12 @@ for (let i = 0; i <= max_tab; i++) {
     iframe.setAttribute("style",`transform:translateX(${i}00%)`);
     iframes.appendChild(iframe);
 
+    if (tab.hasAttribute("default")) selected_tab = i;
     tab.addEventListener("click", function() {
         selected_tab = i;
         render();
     });  
 }
-
-let selected_tab = 0;
 
 function render() {
     const prev_selected = tabs.querySelector(".selected");
