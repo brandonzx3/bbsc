@@ -19,21 +19,6 @@ body{
       border-collapse: collapse;
   }
 
-#topbar {
-    height: 10%;
-    background-color: red;
-    text-align: center;
-    font-weight: bolder;
-    font-size: 45px;
-    color: white;
-}
-
-#links {
-    height: 4%;
-    background-color: rgb(255, 51, 51);
-    text-align: center;
-}
-
 #status {
     font-size: 30px;
     text-align: center;

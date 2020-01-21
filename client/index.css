@@ -1,0 +1,75 @@
+html, body { width: 100%; height: 100%; padding: 0; margin: 0; overflow: hidden; }
+
+body {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    grid-template-columns: 1fr;
+}
+
+h1 {
+    background-color: red;
+    color: white;
+    text-align: center;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 45px;
+}
+
+#tabs {
+    background-color: darkred;
+    color: white;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+}
+#tabs .tab {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    align-items: center; justify-content: center;
+    padding: 5px;
+    transition: 0.4s grid-template-columns, 0.4s background-color;
+    overflow-x: hidden;
+    background-color: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    user-select: none;
+}
+#tabs svg {
+    width: 2em;
+    height: 2em;
+    fill: currentColor;
+}
+#tabs span {
+    padding-left: 0;
+    font-size: 1.5em;
+    display: block;
+    width: min-content;
+    max-width: 0;
+    transition: 0.4s max-width, 0.4s padding-left;
+    visibility: hidden;
+}
+#tabs .tab.selected, #tabs .tab:hover {
+    background-color: black;
+    grid-template-columns: 1em min-content;
+}
+#tabs .tab.selected span, #tabs .tab:hover span {
+    max-width: 10em;
+    padding-left: 15px;
+    visibility: visible;
+}
+
+#iframes {
+    width: 100%;
+    height: 100%;
+    transition: 0.5s transform;
+}
+
+#iframes iframe {
+    width: 100vw;
+    height: 100%;
+    border: none;
+    outline: none;
+    position: absolute;
+}
