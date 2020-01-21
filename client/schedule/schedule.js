@@ -99,7 +99,7 @@ function calculate_start_times() {
 
     for(var i = 1; i < table.rows.length; i++) {
         if(table.rows.length > classes) {
-            table.rows[i + offest].cells[2].innerHTML = "When the teacher says leave";
+            table.rows[i + offest].cells[2].innerHTML = "After school";
         } else {
             table.rows[i].cells[2].innerHTML = table_start_times[i - 1].toString();
         }

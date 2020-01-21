@@ -83,6 +83,7 @@ function saveShortcut (keyEvent) {
 
 function select_note() {
   if (need_save > 0 && selected_note !== null) if (confirm("Save current note?")) save_note();
+  need_save = 0;
   selected_note = this.ref;
   render();
 }
