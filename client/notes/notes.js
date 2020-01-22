@@ -52,15 +52,18 @@ function render() {
     });
     
     const note_name = document.querySelector("#note_name");
+    const note_content = document.querySelector("#noteContent");
     if (selected_note === null) {
       note_name.disabled = true;
+      note_content.contentEditable = false;
       note_name.value = "";
     } else {
       note_name.disabled = false;
+      note_content.contentEditable = true;
       note_name.value = notes[selected_note].name;
     }
 
-    const note_content = document.querySelector("#noteContent");
+    
     if (selected_note === null) note_content.innerHTML = "";
     else {
       const content = localStorage.getItem("note" + notes[selected_note].id);
