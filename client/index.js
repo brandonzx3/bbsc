@@ -28,4 +28,3 @@ function render() {
     iframes.style.transform = `translateX(-${selected_tab}00%)`;
 }
 render();
-

@@ -1,4 +1,12 @@
-html, body { width: 100%; height: 100%; padding: 0; margin: 0; overflow: hidden; }
+html,
+
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
 
 body {
     display: grid;
@@ -11,8 +19,14 @@ h1 {
     color: white;
     text-align: center;
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 45px;
+    font-family: 'Droid Sans';
+    font-size: 4em;
+}
+
+img {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 #tabs {
@@ -23,11 +37,13 @@ h1 {
     align-items: center;
     justify-content: center;
 }
+
 #tabs .tab {
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: auto;
-    align-items: center; justify-content: center;
+    align-items: center;
+    justify-content: center;
     padding: 5px;
     transition: 0.4s grid-template-columns, 0.4s background-color;
     overflow-x: hidden;
@@ -36,27 +52,34 @@ h1 {
     cursor: pointer;
     user-select: none;
 }
+
 #tabs svg {
     width: 2em;
     height: 2em;
     fill: currentColor;
 }
+
 #tabs span {
     padding-left: 0;
-    font-size: 1.5em;
+    font-size: 1em;
     display: block;
     width: min-content;
     max-width: 0;
     transition: 0.4s max-width, 0.4s padding-left;
     visibility: hidden;
 }
-#tabs .tab.selected, #tabs .tab:hover {
-    background-color: black;
-    grid-template-columns: 1em min-content;
+
+#tabs .tab.selected,
+#tabs .tab:hover {
+    background-color: red;
+    grid-template-columns: 1em max-content;
+    height: 85%;
 }
-#tabs .tab.selected span, #tabs .tab:hover span {
+
+#tabs .tab.selected span,
+#tabs .tab:hover span {
     max-width: 10em;
-    padding-left: 15px;
+    padding-left: 17px;
     visibility: visible;
 }
 
@@ -72,4 +95,5 @@ h1 {
     border: none;
     outline: none;
     position: absolute;
+    background-color: lightgray;
 }
