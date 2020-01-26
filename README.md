@@ -2,7 +2,7 @@
 
 ## about bbsc
 
-bbsc(Bradly Bourbonnais Student Centeral) is an online school orginizer and enviroment for students at Bradly Bourbonnais Community High School(bbchs).
+BBSC (Bradley Bourbonnais Student Central) is an online school organizer and enviroment for students at Bradley Bourbonnais Community High School(BBCHS).
 
 ## development
 
