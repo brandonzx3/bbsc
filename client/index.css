@@ -1,3 +1,7 @@
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
 html,
 
 body {
@@ -80,8 +84,9 @@ img {
 #tabs .tab.selected,
 #tabs .tab:hover {
     background-color: red;
-    grid-template-columns: 1em max-content;
+    grid-template-columns: 1.15em max-content;
     height: 85%;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 #tabs .tab.selected span,
