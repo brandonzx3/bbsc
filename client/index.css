@@ -116,3 +116,9 @@ img {
     font-family: 'Droid Sans';
     border-radius: 1rem;
 }
+
+#update {
+    color: red;
+    text-align: center;
+    font-size: 30px;
+}
