@@ -94,12 +94,12 @@ function update_status() {
 }
 
 function calculate_start_times() {
-    let offest = 8; // adding 0 hour funtionality
+    let offset = 8; // adding 0 hour funtionality
     let classes = 9;
 
     for(var i = 1; i < table.rows.length; i++) {
         if(table.rows.length > classes) {
-            table.rows[i + offest].cells[2].innerHTML = "After school";
+            table.rows[i + offset].cells[2].innerHTML = "After school";
         } else {
             table.rows[i].cells[2].innerHTML = table_start_times[i - 1].toString();
         }
