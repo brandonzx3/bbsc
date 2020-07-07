@@ -6,6 +6,13 @@ let table = null;
 let row_index = 1;
 const whitespace_regex = /^\s*$/;
 
+//add some admin account shit to this
+const eat_shit = true;
+
+const not_here_days = [];
+
+var is_not_here_day = false;
+
 const schedule_times = [
     [24600, 28200], //6:50 7:50
     [28800, 31800], //8:00 8:50
@@ -17,7 +24,7 @@ const schedule_times = [
     [47700, 50700], //1:15 2:05
     [51000, 54000] //2:10 3:00
 ];
-const table_start_times = ["8:00:00 AM", "8:55:00 AM", "9:50:00 AM", "10:30:00 AM", "11:25:00 AM", "12:20:00 PM", "1:15:00 PM", "2:10:00 PM"]; //later pull times off of shchedule times and convert back to AM/PM
+const table_start_times = ["6:50:00 AM", "8:00:00 AM", "8:55:00 AM", "9:50:00 AM", "10:30:00 AM", "11:25:00 AM", "12:20:00 PM", "1:15:00 PM", "2:10:00 PM"]; //later pull times off of shchedule times and convert back to AM/PM
 let time_offset = -4;
 let schedule_start_time = 1;
 let has_0_hour = false;
@@ -45,6 +52,24 @@ window.onload = function() {
     document.querySelector("#table_add").onclick = add_schedule_row;
     document.querySelector("#table_remove").onclick = remove_table_row;
     document.querySelector("#table_edit").onclick = activate_edit_schedule;
+
+    let full_date = get_full_date();
+    console.log(full_date);
+    for(i = 0; i < not_here_days.length; i++) {
+        i = not_here_days[i];
+        if(full_date == i) {
+            is_not_here_day = true;
+        }
+    }
+}
+
+function get_full_date() {
+    var date = new Date();
+
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+
+    return `${month}/${day}`;
 }
 
 function elapsed_from_seconds(seconds) {
@@ -65,28 +90,37 @@ function update_status() {
 
         ssm += time_offset;
 
-        //before school
-        if(ssm < schedule_times[schedule_start_time][0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[schedule_start_time][0] - ssm)}`;
-    
-        for (let i = schedule_start_time; i < schedule_times.length; i++) {
-            //In class
-            if (schedule_times[i][0] <= ssm && ssm < schedule_times[i][1])
-            status.innerHTML = `Status: In class. Class ends in ${elapsed_from_seconds(schedule_times[i][1] - ssm)}`;
-            //Passing period
-            const ip = i + 1;
-            if (ip < schedule_times.length) {
-                if (schedule_times[i][1] <= ssm && ssm < schedule_times[ip][0]) {
-                    status.innerHTML = `Status: Heading to Class. Class starts in ${elapsed_from_seconds(schedule_times[ip][0] - ssm)}`;
+        if(!eat_shit) {
+            if(!is_not_here_day) {
+                //before school
+                if(ssm < schedule_times[schedule_start_time][0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[schedule_start_time][0] - ssm)}`;
+        
+                for (let i = schedule_start_time; i < schedule_times.length; i++) {
+                    //In class
+                    if (schedule_times[i][0] <= ssm && ssm < schedule_times[i][1])
+                    status.innerHTML = `Status: In class. Class ends in ${elapsed_from_seconds(schedule_times[i][1] - ssm)}`;
+                    //Passing period
+                    const ip = i + 1;
+                    if (ip < schedule_times.length) {
+                        if (schedule_times[i][1] <= ssm && ssm < schedule_times[ip][0]) {
+                            status.innerHTML = `Status: Heading to Class. Class starts in ${elapsed_from_seconds(schedule_times[ip][0] - ssm)}`;
+                        }
+                    }
                 }
-            }
-        }
-        //after school
-        if(ssm > schedule_times[8][1]) status.innerHTML = "Status: after school";
+                //after school
+                if(ssm > schedule_times[8][1]) status.innerHTML = "Status: after school";
 
-        //weekend
-        if(day === 6 || day === 0) {
-            status.innerHTML = "Status: Weekend";
+                //weekend
+                if(day === 6 || day === 0) {
+                    status.innerHTML = "Status: Weekend";
+                }
+            } else {
+                status.innerHTML = "Day off"
+            }
+        } else {
+            status.innerHTML = "Summer Break"
         }
+
     } catch (err) {
         console.log(err);
         status.innerHTML = `error fetching status: ${err}`;
@@ -94,14 +128,26 @@ function update_status() {
 }
 
 function calculate_start_times() {
-    let offset = 8; // adding 0 hour funtionality
-    let classes = 9;
+    let offset;
+    let classes;
+
+    if(has_0_hour) {
+        offset = 9;
+        classes = 10;
+    } else {
+        offset = 8;
+        classes = 9;
+    }
 
     for(var i = 1; i < table.rows.length; i++) {
         if(table.rows.length > classes) {
             table.rows[i + offset].cells[2].innerHTML = "After school";
         } else {
-            table.rows[i].cells[2].innerHTML = table_start_times[i - 1].toString();
+            if(has_0_hour) {
+                table.rows[i].cells[2].innerHTML = table_start_times[i - 1].toString();
+            } else {
+                table.rows[i].cells[2].innerHTML = table_start_times[i].toString();
+            }
         }
     }
 }
