@@ -7,7 +7,7 @@ let row_index = 1;
 const whitespace_regex = /^\s*$/;
 
 //add some admin account shit to this
-const eat_shit = true;
+const summer = false;
 
 const not_here_days = [];
 
@@ -90,7 +90,7 @@ function update_status() {
 
         ssm += time_offset;
 
-        if(!eat_shit) {
+        if(!summer) {
             if(!is_not_here_day) {
                 //before school
                 if(ssm < schedule_times[schedule_start_time][0]) status.innerHTML = `Status: School starts in ${elapsed_from_seconds(schedule_times[schedule_start_time][0] - ssm)}`;
