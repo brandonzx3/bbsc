@@ -119,7 +119,7 @@ function update_status() {
                     }
                 }
                 //after school
-                if(ssm > schedule_times[8][1]) status.innerHTML = "Status: after school";
+                if(ssm > schedule_times[7][1]) status.innerHTML = "Status: after school";
 
                 //weekend
                 if(day === 6 || day === 0) {
