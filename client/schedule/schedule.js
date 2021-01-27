@@ -145,10 +145,12 @@ function calculate_start_times() {
     if(has_0_hour) {
         classes = 10;
     } else {
-        classes = 8; // change to 9 when boiler block is back
+        classes = 9; 
     }
 
     let offset = classes - 1;
+    //overide # of classes
+    classes -= 1;
 
     for(var i = 1; i < table.rows.length; i++) {
         if(table.rows.length > classes) {
