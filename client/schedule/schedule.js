@@ -13,6 +13,8 @@ const not_here_days = [];
 
 var is_not_here_day = false;
 
+var m = new Date();
+
 const schedule_times = [
     [26100, 28200], //7:15 7:55 : 0
     [28800, 31200], //8:00 8:40 : 1
@@ -65,7 +67,6 @@ window.onload = function() {
     document.querySelector("#table_remove").onclick = remove_table_row;
     document.querySelector("#table_edit").onclick = activate_edit_schedule;
 
-    let full_date = get_full_date();
     console.log(full_date);
     for(i = 0; i < not_here_days.length; i++) {
         i = not_here_days[i];
@@ -75,14 +76,6 @@ window.onload = function() {
     }
 }
 
-function get_full_date() {
-    var date = new Date();
-
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-
-    return `${month}/${day}`;
-}
 
 function elapsed_from_seconds(seconds) {
     const hours = Math.floor(seconds / (60 * 60));
@@ -97,10 +90,15 @@ function elapsed_from_seconds(seconds) {
 function update_status() {
     try {
         const date = new Date();
+        var dateString = m.getUTCFullYear() +"/"+ (m.getUTCMonth()+1) +"/"+ m.getUTCDate();
         let ssm = (date.getHours() * 3600) + (date.getMinutes() * 60) + date.getSeconds();
         let day = date.getDay();
 
         ssm += time_offset;
+
+        for(let i = 0; i < not_here_days.length; i++) {
+            dateString === not_here_days[i].toString() ? is_not_here_day = true : is_not_here_day = false;
+        }
 
         if(!summer) {
             if(!is_not_here_day) {
