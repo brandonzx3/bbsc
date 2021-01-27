@@ -35,7 +35,8 @@ const schedule_times_origional = [
     [47700, 50700], //1:15 2:05
     [51000, 54000] //2:10 3:00
 ];
-const table_start_times = ["6:50:00 AM", "8:00:00 AM", "8:55:00 AM", "9:50:00 AM", "10:30:00 AM", "11:25:00 AM", "12:20:00 PM", "1:15:00 PM", "2:10:00 PM"]; //later pull times off of shchedule times and convert back to AM/PM
+const table_start_times_old = ["6:50 AM", "8:00 AM", "8:55 AM", "9:50 AM", "10:30 AM", "11:25 AM", "12:20 PM", "1:15 PM", "2:10 PM"]; //later pull times off of shchedule times and convert back to AM/PM
+const table_start_times = ["7:15 AM", "8:00 AM", "8:45 AM", "9:30 AM", "10:15 AM", "11:00 AM", "11:45 AM", "12:30 PM"];
 let time_offset = -4;
 let schedule_start_time = 1;
 let has_0_hour = false;
@@ -139,16 +140,15 @@ function update_status() {
 }
 
 function calculate_start_times() {
-    let offset;
     let classes;
 
     if(has_0_hour) {
-        offset = 9;
         classes = 10;
     } else {
-        offset = 8;
-        classes = 9;
+        classes = 8; // change to 9 when boiler block is back
     }
+
+    let offset = classes - 1;
 
     for(var i = 1; i < table.rows.length; i++) {
         if(table.rows.length > classes) {
