@@ -39,7 +39,7 @@ const schedule_times_origional = [
 ];
 const table_start_times_old = ["6:50 AM", "8:00 AM", "8:55 AM", "9:50 AM", "10:30 AM", "11:25 AM", "12:20 PM", "1:15 PM", "2:10 PM"]; //later pull times off of shchedule times and convert back to AM/PM
 const table_start_times = ["7:15 AM", "8:00 AM", "8:45 AM", "9:30 AM", "10:15 AM", "11:00 AM", "11:45 AM", "12:30 PM"];
-let time_offset = -4;
+let time_offset = -5;
 let schedule_start_time = 1;
 let has_0_hour = false;
 
@@ -49,6 +49,7 @@ window.onload = function() {
     edit_button = document.querySelector("#edit_button");
     edit_schedule = document.querySelector("#tab");
     table = document.querySelector("#table");
+    zero_hour_toggle = document.querySelector("#hour");
 
     //Initialize display
     edit_schedule.style.display = "none";
@@ -66,16 +67,19 @@ window.onload = function() {
     document.querySelector("#table_add").onclick = add_schedule_row;
     document.querySelector("#table_remove").onclick = remove_table_row;
     document.querySelector("#table_edit").onclick = activate_edit_schedule;
+    
+    if(localStorage.getItem("0_hour") == null) {
+        localStorage.setItem("0_hour", zero_hour_toggle.checked);
+    } else {
+        has_0_hour = localStorage.getItem("0_hour");
+    }
 
-    console.log(full_date);
-    for(i = 0; i < not_here_days.length; i++) {
-        i = not_here_days[i];
-        if(full_date == i) {
-            is_not_here_day = true;
-        }
+    if(has_0_hour) {
+        zero_hour_toggle.checked = true;
+    } else {
+        zero_hour_toggle.checked = false;
     }
 }
-
 
 function elapsed_from_seconds(seconds) {
     const hours = Math.floor(seconds / (60 * 60));
@@ -143,12 +147,11 @@ function calculate_start_times() {
     if(has_0_hour) {
         classes = 10;
     } else {
-        classes = 9; 
+        classes = 9;
     }
 
-    let offset = classes - 1;
-    //overide # of classes
     classes -= 1;
+    let offset = classes - 1;
 
     for(var i = 1; i < table.rows.length; i++) {
         if(table.rows.length > classes) {
@@ -187,8 +190,13 @@ function on_edit_button() {
         edit_schedule.style.display = "none";
         edit_button.innerHTML = "Edit Schedule";
         localStorage.setItem("schedule", table.innerHTML);
+        localStorage.setItem("0_hour", zero_hour_toggle.checked);
     }
 };
+
+function Update_zero_hour() {
+    zero_hour_toggle.checked ? has_0_hour = true : has_0_hour = false;
+}
 
 function add_table_row() {
     var new_row = table.insertRow(table.length),
@@ -204,6 +212,7 @@ function add_table_row() {
     cell2.innerHTML = schedule_room;
 
     select_row_to_input();
+    Update_zero_hour();
     calculate_start_times();
 }
 
@@ -225,11 +234,13 @@ function edit_table_row() {
     table.rows[row_index].cells[1].innerHTML = schedule_room;
     document.getElementById("class").value = "";
     document.getElementById("room").value = "";
+    Update_zero_hour();
 }
 
 function remove_table_row() {
     table.deleteRow(row_index);
     document.getElementById("class").value = "";
     document.getElementById("room").value = "";
+    Update_zero_hour();
     calculate_start_times();
 }
