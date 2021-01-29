@@ -182,6 +182,14 @@ function activate_edit_schedule() {
     }
 }
 
+function fix_table_color() {
+   for(var i = 1; i < table.rows.length; i++) {
+       table.rows[i].cells[0].style.background = "white";
+       table.rows[i].cells[1].style.background = "white";
+       table.rows[i].cells[2].style.background = "white";
+   }
+}
+
 function on_edit_button() {
     if(edit_schedule.style.display === "none") {
         edit_schedule.style.display = "inline-block";
@@ -191,6 +199,7 @@ function on_edit_button() {
         edit_button.innerHTML = "Edit Schedule";
         Update_zero_hour();
         calculate_start_times();
+        fix_table_color();
         localStorage.setItem("schedule", table.innerHTML);
     }
 };
@@ -223,6 +232,10 @@ function select_row_to_input() {
         table.rows[i].onclick = function() {
             //get the seected row index
             row_index = this.rowIndex;
+            fix_table_color();
+            table.rows[row_index].cells[0].style.background = "cyan";
+            table.rows[row_index].cells[1].style.background = "cyan";
+            table.rows[row_index].cells[2].style.background = "cyan";
             document.getElementById("class").value = this.cells[0].innerHTML;
             document.getElementById("room").value = this.cells[1].innerHTML;
         }
