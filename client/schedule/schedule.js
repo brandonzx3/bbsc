@@ -69,15 +69,10 @@ window.onload = function() {
     document.querySelector("#table_edit").onclick = activate_edit_schedule;
     
     if(localStorage.getItem("0_hour") == null) {
-        localStorage.setItem("0_hour", zero_hour_toggle.checked);
+        localStorage.setItem("0_hour", false);
     } else {
         has_0_hour = localStorage.getItem("0_hour");
-    }
-
-    if(has_0_hour) {
-        zero_hour_toggle.checked = true;
-    } else {
-        zero_hour_toggle.checked = false;
+        zero_hour_toggle.checked = localStorage.getItem("0_hour");
     }
 }
 
@@ -190,12 +185,14 @@ function on_edit_button() {
         edit_schedule.style.display = "none";
         edit_button.innerHTML = "Edit Schedule";
         localStorage.setItem("schedule", table.innerHTML);
-        localStorage.setItem("0_hour", zero_hour_toggle.checked);
+        Update_zero_hour();
+        calculate_start_times();
     }
 };
 
 function Update_zero_hour() {
-    zero_hour_toggle.checked ? has_0_hour = true : has_0_hour = false;
+    has_0_hour = zero_hour_toggle.checked;
+    localStorage.setItem("0_hour", has_0_hour);
 }
 
 function add_table_row() {
