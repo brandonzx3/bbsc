@@ -187,9 +187,9 @@ function on_edit_button() {
     } else {
         edit_schedule.style.display = "none";
         edit_button.innerHTML = "Edit Schedule";
-        localStorage.setItem("schedule", table.innerHTML);
         Update_zero_hour();
         calculate_start_times();
+        localStorage.setItem("schedule", table.innerHTML);
     }
 };
 
