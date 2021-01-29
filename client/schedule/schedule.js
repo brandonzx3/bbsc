@@ -43,6 +43,13 @@ let time_offset = -5;
 let schedule_start_time = 1;
 let has_0_hour = false;
 
+function get_zero_hour_setting() {
+	return localStorage.getItem("0_hour") === "true";
+}
+function set_zero_hour_setting(has_0_hour) {
+	localStorage.setItem("0_hour", has_0_hour ? "true" : "false");
+}
+
 window.onload = function() {
     //Fetch elements
     status = document.querySelector("#status");
@@ -68,12 +75,8 @@ window.onload = function() {
     document.querySelector("#table_remove").onclick = remove_table_row;
     document.querySelector("#table_edit").onclick = activate_edit_schedule;
     
-    if(localStorage.getItem("0_hour") == null) {
-        localStorage.setItem("0_hour", false);
-    } else {
-        has_0_hour = localStorage.getItem("0_hour");
-        zero_hour_toggle.checked = localStorage.getItem("0_hour");
-    }
+	has_0_hour = get_zero_hour_setting();
+	zero_hour_toggle.checked = has_0_hour;
 }
 
 function elapsed_from_seconds(seconds) {
@@ -192,7 +195,7 @@ function on_edit_button() {
 
 function Update_zero_hour() {
     has_0_hour = zero_hour_toggle.checked;
-    localStorage.setItem("0_hour", has_0_hour);
+	set_zero_hour_setting(has_0_hour);
 }
 
 function add_table_row() {
