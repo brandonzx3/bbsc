@@ -40,7 +40,7 @@ const schedule_times_origional = [
 const table_start_times_old = ["6:50 AM", "8:00 AM", "8:55 AM", "9:50 AM", "10:30 AM", "11:25 AM", "12:20 PM", "1:15 PM", "2:10 PM"]; //later pull times off of shchedule times and convert back to AM/PM
 const table_start_times = ["7:15 AM", "8:00 AM", "8:45 AM", "9:30 AM", "10:15 AM", "11:00 AM", "11:45 AM", "12:30 PM"];
 let time_offset = -5;
-let schedule_start_time = 1;
+let schedule_start_time;
 let has_0_hour = false;
 
 function get_zero_hour_setting() {
@@ -49,6 +49,8 @@ function get_zero_hour_setting() {
 function set_zero_hour_setting(has_0_hour) {
 	localStorage.setItem("0_hour", has_0_hour ? "true" : "false");
 }
+
+has_0_hour ? schedule_start_time = 0 : schedule_start_time = 1;
 
 window.onload = function() {
     //Fetch elements
