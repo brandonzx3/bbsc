@@ -9,11 +9,11 @@ const whitespace_regex = /^\s*$/;
 //add some admin account shit to this
 const summer = false;
 
-const not_here_days = [];
+const not_here_days = [
+    //put days off here <yyyy/m/d>
+];
 
 var is_not_here_day = false;
-
-var m = new Date();
 
 const schedule_times = [
     [26100, 28200], //7:15 7:55 : 0
@@ -69,6 +69,7 @@ window.onload = function() {
     }
 
     select_row_to_input();
+    edit_row_color(false);
     setInterval(function(){ update_status(); }, 300);
     
     //Add event listeners
@@ -94,7 +95,7 @@ function elapsed_from_seconds(seconds) {
 function update_status() {
     try {
         const date = new Date();
-        var dateString = m.getUTCFullYear() +"/"+ (m.getUTCMonth()+1) +"/"+ m.getUTCDate();
+        var dateString = date.getUTCFullYear() + "/" + (date.getUTCMonth() +1) + "/" + date.getUTCDate();
         let ssm = (date.getHours() * 3600) + (date.getMinutes() * 60) + date.getSeconds();
         let day = date.getDay();
 
@@ -169,6 +170,8 @@ function calculate_start_times() {
 function add_schedule_row() {
     if(!whitespace_regex.test(document.querySelector("#class").value) && !whitespace_regex.test(document.querySelector("#room").value)) {
         add_table_row();
+        row_index = table.rows.length;
+        select_row_to_input();
     } else {
         alert("this field cannot be left blank");
     }
@@ -182,24 +185,30 @@ function activate_edit_schedule() {
     }
 }
 
-function fix_table_color() {
+function edit_row_color(select) {
    for(var i = 1; i < table.rows.length; i++) {
        table.rows[i].cells[0].style.background = "white";
        table.rows[i].cells[1].style.background = "white";
        table.rows[i].cells[2].style.background = "white";
    }
+    if(select) {
+        table.rows[row_index].cells[0].style.background = "cyan";
+        table.rows[row_index].cells[1].style.background = "cyan";
+        table.rows[row_index].cells[2].style.background = "cyan";
+    }
 }
 
 function on_edit_button() {
     if(edit_schedule.style.display === "none") {
         edit_schedule.style.display = "inline-block";
         edit_button.innerHTML = "Save Schedule";
+        select_row_to_input();
     } else {
         edit_schedule.style.display = "none";
         edit_button.innerHTML = "Edit Schedule";
         Update_zero_hour();
         calculate_start_times();
-        fix_table_color();
+        edit_row_color(false);
         localStorage.setItem("schedule", table.innerHTML);
     }
 };
@@ -229,13 +238,11 @@ function add_table_row() {
 
 function select_row_to_input() {
     for(var i = 1; i < table.rows.length; i++) {
+        edit_row_color(true);
         table.rows[i].onclick = function() {
             //get the seected row index
             row_index = this.rowIndex;
-            fix_table_color();
-            table.rows[row_index].cells[0].style.background = "cyan";
-            table.rows[row_index].cells[1].style.background = "cyan";
-            table.rows[row_index].cells[2].style.background = "cyan";
+            edit_row_color(true);
             document.getElementById("class").value = this.cells[0].innerHTML;
             document.getElementById("room").value = this.cells[1].innerHTML;
         }
