@@ -2,6 +2,7 @@ let status = null;
 let edit_button = null;
 let edit_schedule = null;
 let table = null;
+is_editing = false;
 
 let row_index = 1;
 const whitespace_regex = /^\s*$/;
@@ -202,10 +203,12 @@ function on_edit_button() {
     if(edit_schedule.style.display === "none") {
         edit_schedule.style.display = "inline-block";
         edit_button.innerHTML = "Save Schedule";
+        is_editing = true
         select_row_to_input();
     } else {
         edit_schedule.style.display = "none";
         edit_button.innerHTML = "Edit Schedule";
+        is_editing = false;
         Update_zero_hour();
         calculate_start_times();
         edit_row_color(false);
@@ -241,8 +244,10 @@ function select_row_to_input() {
         edit_row_color(true);
         table.rows[i].onclick = function() {
             //get the seected row index
-            row_index = this.rowIndex;
-            edit_row_color(true);
+            if(is_editing) {
+                row_index = this.rowIndex;
+                edit_row_color(true);
+            }
             document.getElementById("class").value = this.cells[0].innerHTML;
             document.getElementById("room").value = this.cells[1].innerHTML;
         }
