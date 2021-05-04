@@ -2,7 +2,8 @@ let status = null;
 let edit_button = null;
 let edit_schedule = null;
 let table = null;
-is_editing = false;
+let is_editing = false;
+let zero_hour_toggle = null;
 
 let row_index = 1;
 const whitespace_regex = /^\s*$/;
