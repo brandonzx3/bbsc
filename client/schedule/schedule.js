@@ -18,17 +18,6 @@ const not_here_days = [
 var is_not_here_day = false;
 
 const schedule_times = [
-    [26100, 28200], //7:15 7:55 : 0
-    [28800, 31200], //8:00 8:40 : 1
-    [31500, 33900], //8:45 9:25 : 2
-    [34200, 36600], //9:30 10:10 : 3
-    [36900, 39300], //10:15 10:55 : 4
-    [39600, 42000], //11:00 11:40 : 5
-    [42300, 44700], //11:45 12:25 : 6
-    [45000, 47400], //12:30 1:10 : 7
-];
-
-const schedule_times_origional = [
     [24600, 28200], //6:50 7:50
     [28800, 31800], //8:00 8:50
     [32100, 35100], //8:55 9:45
@@ -39,8 +28,7 @@ const schedule_times_origional = [
     [47700, 50700], //1:15 2:05
     [51000, 54000] //2:10 3:00
 ];
-const table_start_times_old = ["6:50 AM", "8:00 AM", "8:55 AM", "9:50 AM", "10:30 AM", "11:25 AM", "12:20 PM", "1:15 PM", "2:10 PM"]; //later pull times off of shchedule times and convert back to AM/PM
-const table_start_times = ["7:15 AM", "8:00 AM", "8:45 AM", "9:30 AM", "10:15 AM", "11:00 AM", "11:45 AM", "12:30 PM"];
+const table_start_times = ["6:50 AM", "8:00 AM", "8:55 AM", "9:50 AM", "10:30 AM", "11:25 AM", "12:20 PM", "1:15 PM", "2:10 PM"]; //later pull times off of shchedule times and convert back to AM/PM
 let time_offset = -5;
 let schedule_start_time;
 let has_0_hour = false;
