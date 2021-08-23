@@ -140,8 +140,7 @@ function calculate_start_times() {
     } else {
         classes = 9;
     }
-
-    classes -= 1;
+	
     let offset = classes - 1;
 
     for(var i = 1; i < table.rows.length; i++) {
