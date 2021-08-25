@@ -73,6 +73,7 @@ button:focus {outline:0;}
     display: flex; flex-flow: column nowrap;
     width: 100%;
     margin-top: 20px;
+    overflow-y: auto;
 }
 #notes_list .note_entry {
     border-top: 1px solid white;
