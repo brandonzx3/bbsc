@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/brandonzx3/bbsc#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "seconds-since-midnight": "^1.0.6"
   }
 }
